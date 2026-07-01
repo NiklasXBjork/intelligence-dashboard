@@ -180,7 +180,7 @@ ${weaknesses.join(" | ") || "NO MAJOR ISSUES"}`);
   };
 
   return (
-    <div className="min-h-screen bg-gray-950 text-green-400 p-6 grid grid-cols-1 md:grid-cols-3 gap-4 font-mono">
+    <div style={{ minHeight: "100vh", background: "black", color: "lime" }} p-6 grid grid-cols-1 md:grid-cols-3 gap-4 font-mono">
 
 
       {/* LEFT PANEL */}

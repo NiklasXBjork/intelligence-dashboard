@@ -1,9 +1,56 @@
 "use client";
+// ✅ SIMPLE BUILT-IN UI COMPONENTS (no external dependencies)
+
+const Card = ({ children }) => (
+  <div style={{ border: "1px solid lime", padding: "12px", background: "black" }}>
+    {children}
+  </div>
+);
+
+const CardContent = ({ children }) => <div>{children}</div>;
+
+const Button = ({ children, ...props }) => (
+  <button
+    {...props}
+    style={{
+      border: "1px solid lime",
+      padding: "6px 10px",
+      marginTop: "5px",
+      background: "#020617",
+      color: "lime",
+      cursor: "pointer"
+    }}
+  >
+    {children}
+  </button>
+);
+
+const Input = (props) => (
+  <input
+    {...props}
+    style={{
+      width: "100%",
+      padding: "6px",
+      background: "#020617",
+      color: "lime",
+      border: "1px solid lime"
+    }}
+  />
+);
+
+const Textarea = (props) => (
+  <textarea
+    {...props}
+    style={{
+      width: "100%",
+      padding: "6px",
+      background: "#020617",
+      color: "lime",
+      border: "1px solid lime"
+    }}
+  />
+);
 import { useState, useEffect } from "react";
-import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 
 export default function StudyPlannerDashboard() {
   const [goal, setGoal] = useState("");

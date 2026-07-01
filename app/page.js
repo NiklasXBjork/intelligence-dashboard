@@ -180,78 +180,67 @@ ${weaknesses.join(" | ") || "NO MAJOR ISSUES"}`);
   };
 
   return (
-    <div style={{ minHeight: "100vh", background: "black", color: "lime" }} p-6 grid grid-cols-1 md:grid-cols-3 gap-4 font-mono">
+  <div style={{
+    minHeight: "100vh",
+    background: "#020617",
+    color: "#00ff88",
+    padding: "20px",
+    fontFamily: "monospace",
+    display: "grid",
+    gridTemplateColumns: "1fr 1fr 1fr",
+    gap: "15px"
+  }}>
 
+    {/* LEFT PANEL */}
+    <Card>
+      <CardContent>
+        <h2>[PROFILE]</h2>
+        <p>RANK: {rank}</p>
+        <p>XP: {xp}</p>
+      </CardContent>
+    </Card>
 
-      {/* LEFT PANEL */}
-      <Card className="bg-black border border-green-500">
-        <CardContent>
-          <h2 className="text-lg">[PROFILE]</h2>
-          <p>RANK: {rank}</p>
-          <p>XP: {xp}</p>
-          <h3 className="mt-2">[SKILLS]</h3>
-          {Object.entries(skills).map(([k, v]) => (
-            <p key={k}>{k.toUpperCase()}: {v}</p>
-          ))}
-        </CardContent>
-      </Card>
+    {/* CENTER PANEL */}
+    <Card>
+      <CardContent>
+        <h2>[MISSION]</h2>
+        <Input
+          value={goal}
+          onChange={(e) => setGoal(e.target.value)}
+          placeholder="DEFINE OBJECTIVE"
+        />
+      </CardContent>
+    </Card>
 
-      {/* CENTER */}
-      <div className="space-y-4">
-        <Card className="bg-black border border-green-500">
-          <CardContent>
-            <h2>[MISSION]</h2>
-            <Input value={goal} onChange={(e) => setGoal(e.target.value)} placeholder="DEFINE OBJECTIVE" className="bg-gray-900 text-green-400" />
-          </CardContent>
-        </Card>
+    {/* RIGHT PANEL */}
+    <Card>
+      <CardContent>
+        <h2>[SIMULATION]</h2>
+        <Button onClick={generateScenario}>INIT</Button>
 
+        {scenario && (
+          <>
+            <p>{scenario}</p>
+            <p>{steps[stepIndex]}</p>
 
-        <Card className="bg-black border border-green-500">
-          <CardContent>
-            <h2>[INTEL FEED]</h2>
-            {loadingNews ? <p>LOADING...</p> : news.map((n, i) => <p key={i}>- {n}</p>)}
-          </CardContent>
-        </Card>
+            <Textarea
+              value={answers[stepIndex]}
+              onChange={(e) => updateAnswer(e.target.value)}
+            />
 
+            {stepIndex < 3 ? (
+              <Button onClick={nextStep}>NEXT</Button>
+            ) : (
+              <Button onClick={evaluate}>EVALUATE</Button>
+            )}
+          </>
+        )}
 
-        <Card className="bg-black border border-green-500">
-          <CardContent>
-            <h2>[MODES]</h2>
-            <Button onClick={() => setRedTeam(!redTeam)}>RED TEAM: {redTeam ? "ON" : "OFF"}</Button>
-            <Button onClick={() => setEliteMode(!eliteMode)} className="ml-2">ELITE: {eliteMode ? "ON" : "OFF"}</Button>
-          </CardContent>
-        </Card>
-      </div>
+        {score !== null && <p>SCORE: {score}/100</p>}
+        {feedback && <p>{feedback}</p>}
+      </CardContent>
+    </Card>
 
-
-      {/* RIGHT PANEL */}
-      <Card className="bg-black border border-green-500">
-        <CardContent>
-          <h2>[SIMULATION]</h2>
-          <Button onClick={generateScenario}>INIT</Button>
-
-
-          {scenario && (
-            <>
-              <p className="mt-2">{scenario}</p>
-              <p>{steps[stepIndex]}</p>
-              <Textarea
-                value={answers[stepIndex]}
-                onChange={(e) => updateAnswer(e.target.value)}
-                className="bg-gray-900 text-green-400"
-              />
-              {stepIndex < 3 ? (
-                <Button onClick={nextStep}>NEXT</Button>
-              ) : (
-                <Button onClick={evaluate}>EVALUATE</Button>
-              )}
-            </>
-          )}
-
-          {score !== null && <p>SCORE: {score}/100</p>}
-          {feedback && <p>{feedback}</p>}
-        </CardContent>
-      </Card>
-    </div>
+  </div>
   );
 }

@@ -104,17 +104,30 @@ export default function StudyPlannerDashboard() {
 
   // 🌍 Fetch geopolitics
   useEffect(() => {
-    fetch("https://api.gdeltproject.org/api/v2/doc/doc?query=geopolitics OR conflict&mode=ArtList&maxrecords=5&format=json")
-      .then(res => res.json())
-      .then(data => {
-        setNews(data.articles?.map(a => a.title) || []);
-        setLoadingNews(false);
-      })
-      .catch(() => {
-        setNews(["INTEL FEED OFFLINE"]);
-        setLoadingNews(false);
-      });
-  }, []);
+  fetch("https://api.gdeltproject.org/api/v2/doc/doc?query=geopolitics OR conflict&mode=ArtList&maxrecords=5&format=json")
+    .then(res => res.json())
+    .then(data => {
+      if (data.articles && data.articles.length > 0) {
+        setNews(data.articles.map(a => a.title));
+      } else {
+        setNews([
+          "Global tensions rising between major powers",
+          "Cybersecurity threats increasing worldwide",
+          "Economic instability affecting multiple regions"
+        ]);
+      }
+      setLoadingNews(false);
+    })
+    .catch(() => {
+      setNews([
+        "INTEL FALLBACK: geopolitical instability",
+        "INTEL FALLBACK: cyber threats rising",
+        "INTEL FALLBACK: economic pressure globally"
+      ]);
+      setLoadingNews(false);
+    });
+}, []);
+
 
 
   // 🧠 Scenario

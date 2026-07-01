@@ -2,7 +2,13 @@
 // ✅ SIMPLE BUILT-IN UI COMPONENTS (no external dependencies)
 
 const Card = ({ children }) => (
-  <div style={{ border: "1px solid lime", padding: "12px", background: "black" }}>
+  <div
+    style={{
+      border: "1px solid #00ff88",
+      padding: "12px",
+      background: "#020617"
+    }}
+  >
     {children}
   </div>
 );
@@ -13,12 +19,13 @@ const Button = ({ children, ...props }) => (
   <button
     {...props}
     style={{
-      border: "1px solid lime",
-      padding: "6px 10px",
-      marginTop: "5px",
+      border: "1px solid #00ff88",
+      padding: "8px 12px",
+      marginTop: "8px",
       background: "#020617",
-      color: "lime",
-      cursor: "pointer"
+      color: "#00ff88",
+      cursor: "pointer",
+      display: "inline-block"
     }}
   >
     {children}
@@ -31,9 +38,10 @@ const Input = (props) => (
     style={{
       width: "100%",
       padding: "6px",
+      marginTop: "5px",
       background: "#020617",
-      color: "lime",
-      border: "1px solid lime"
+      color: "#00ff88",
+      border: "1px solid #00ff88"
     }}
   />
 );
@@ -44,9 +52,10 @@ const Textarea = (props) => (
     style={{
       width: "100%",
       padding: "6px",
+      marginTop: "5px",
       background: "#020617",
-      color: "lime",
-      border: "1px solid lime"
+      color: "#00ff88",
+      border: "1px solid #00ff88"
     }}
   />
 );
